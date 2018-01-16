@@ -21,7 +21,8 @@
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowUnreachableCode": true
+    "allowUnreachableCode": true,
+    "strict": true
   },
   "include": ["src/app/**/*.ts"]
 }

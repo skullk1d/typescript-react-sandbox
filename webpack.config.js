@@ -14,7 +14,7 @@ const OUTPUT_PATH = 'dist';
 
 const config = {
   // Main entry point for application:
-  entry: './src/app.js',
+  entry: './src/app.jsx',
 
   output: {
     path: path.resolve(__dirname, OUTPUT_PATH),
