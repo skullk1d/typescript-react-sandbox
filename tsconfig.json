@@ -7,9 +7,9 @@
       "es2015",
       "es2016"
     ],
-    "jsx": "preserve",
-    "target": "es2016",
-    "module": "es2015",
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
     "moduleResolution": "node",
     "allowJs": true,
     "noImplicitAny": true,
@@ -21,8 +21,10 @@
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowUnreachableCode": true,
+    "allowUnreachableCode": false,
     "strict": true
   },
-  "include": ["src/app/**/*.ts"]
+  "include": [
+    "src/app/**/*"
+  ]
 }

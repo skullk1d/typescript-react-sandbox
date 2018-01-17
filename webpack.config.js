@@ -20,7 +20,7 @@ const config = {
     path: path.resolve(__dirname, OUTPUT_PATH),
     // `name` and `chunkhash` is used in order
     // to name `vendor` files as well.
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[hash].js',
   },
 
   module: {
@@ -50,11 +50,11 @@ const config = {
       // All files ending .ts (except those in `node_modules`) that are required by webpack
       // will pass through `ts-loader`.
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'ts-loader',
+            loader: 'awesome-typescript-loader',
           },
         ]
       },
@@ -155,6 +155,8 @@ const config = {
         return module.context && module.context.indexOf('node_modules') !== -1;
       }
     }),
+
+    new webpack.HotModuleReplacementPlugin(),
   ]
 };
 
