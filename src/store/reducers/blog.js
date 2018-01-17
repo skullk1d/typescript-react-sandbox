@@ -1,9 +1,10 @@
 import { Status } from '../../enums';
+import { FeedDatum } from '../../types';
 
 const initialState = {
 	status: Status.IDLE,
 	error: null,
-	dbBlogPosts: []
+	data: []
 };
 
 const blog = (state = initialState, action) => {
@@ -18,7 +19,7 @@ const blog = (state = initialState, action) => {
 			return Object.assign({}, state, {
 				status: Status.SUCCESS,
 				error: null,
-				dbBlogPosts: action.payload
+				data: action.payload
 			});
 		}
 		case 'GET_BLOG_POSTS_REJECTED': {
