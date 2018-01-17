@@ -1,24 +1,24 @@
 import { Status } from '../../enums';
-import { FeedDatum } from '../../types';
+import { BlogState, Action } from '../../types';
 
-const initialState = {
+const initialState: BlogState = {
 	status: Status.IDLE,
-	error: null,
+	error: '',
 	data: []
 };
 
-const blog = (state = initialState, action) => {
+const blog = (state = initialState, action: Action) => {
 	switch (action.type) {
 		case 'GET_BLOG_POSTS_PENDING': {
 			return Object.assign({}, state, {
 				status: Status.PENDING,
-				error: null
+				error: ''
 			});
 		}
 		case 'GET_BLOG_POSTS_FULFILLED': {
 			return Object.assign({}, state, {
 				status: Status.SUCCESS,
-				error: null,
+				error: '',
 				data: action.payload
 			});
 		}

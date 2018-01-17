@@ -1,8 +1,25 @@
+import { State, Post } from '../../types';
+import { Status } from '../../enums';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import BlogFeed from './BlogFeed';
+import { getPosts } from '../../store/actions/blog';
 
-const mapStateToProps = (state: any/* , ownProps: any */) => {
-	// "routes" props is provided by React-Router, which stores a reference of the "Route" components according to browser history
+interface StateProps {
+	feedStatus: Status,
+	feedErr: string,
+	feedData: Post[]
+}
+
+interface DispatchProps {
+	onGetPosts: () => void
+}
+
+interface OwnProps {
+
+}
+
+const mapStateToProps = (state: State): StateProps => {
 	return {
 		feedStatus: state.blog.status,
 		feedErr: state.blog.error,
@@ -10,12 +27,15 @@ const mapStateToProps = (state: any/* , ownProps: any */) => {
 	};
 };
 
-// dispatch navigation directly, or setup dispatch a view transition first
-const mapDispatchToProps = (/* dispatch: any */) => {
-	return {};
+const mapDispatchToProps = (dispatch: Dispatch<State>): DispatchProps => {
+	return {
+		onGetPosts: () => {
+			dispatch(getPosts());
+		}
+	};
 };
 
-const BlogFeedContainer = connect(
+const BlogFeedContainer = connect<StateProps, DispatchProps, OwnProps, State>(
 	mapStateToProps,
 	mapDispatchToProps
 )(BlogFeed);

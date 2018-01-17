@@ -4,12 +4,13 @@
 
 import React from 'react';
 import { Status } from '../../enums';
-import { FeedDatum } from '../../types';
+import { Post } from '../../types';
 
 export interface BlogFeedProps {
 	feedStatus: Status,
 	feedErr: string,
-	feedData: FeedDatum[]
+	feedData: Post[],
+	onGetPosts: () => void
 };
 
 class BlogFeed extends React.Component<BlogFeedProps, {}> {
@@ -41,7 +42,7 @@ class BlogFeed extends React.Component<BlogFeedProps, {}> {
 		);
 	}
 
-	getFeedEl(feedData: FeedDatum[]) {
+	getFeedEl(feedData: Post[]) {
 		return (
 			<div>
 				{feedData}
