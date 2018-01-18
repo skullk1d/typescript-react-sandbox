@@ -6,13 +6,9 @@ import React from 'react';
 import { Status } from '../../enums';
 import { Post } from '../../types';
 
-export interface BlogFeedProps {
-	feedStatus: Status,
-	feedErr: string,
-	feedData: Post[],
-	onGetPosts: () => void,
-	onGoToPost: (id: Number) => void
-};
+import { StateProps, DispatchProps, OwnProps } from './container';
+
+export interface BlogFeedProps extends StateProps, DispatchProps, OwnProps {};
 
 class BlogFeed extends React.Component<BlogFeedProps, {}> {
 	constructor(props: BlogFeedProps) {
@@ -38,17 +34,17 @@ class BlogFeed extends React.Component<BlogFeedProps, {}> {
 	getLoadingEl() {
 		return (
 			<div>
-				Loading feed...
+				Loading posts...
 			</div>
 		);
 	}
 
-	getFeedEl(feedData: Post[]) {
+	getFeedEl(posts: Post[]) {
 		return (
 			<div>
 				<ul>
-					{feedData.map((d, i) => (
-						<li key={i} onClick={() => this.goToPost(d.id)}>
+					{posts.map((d, i) => (
+						<li key={i} onClick={() => this.props.onGoToPost(d.id)}>
 							{d.id}
 						</li>
 					))}
@@ -57,12 +53,8 @@ class BlogFeed extends React.Component<BlogFeedProps, {}> {
 		);
 	}
 
-	goToPost(id: Number) {
-		this.props.onGoToPost(id);
-	}
-
 	componentDidMount() {
-		if (!this.props.feedData.length) {
+		if (!this.props.posts.length) {
 			this.props.onGetPosts();
 		}
 	}
@@ -72,14 +64,14 @@ class BlogFeed extends React.Component<BlogFeedProps, {}> {
 			<div className="BlogFeed">
 				<button
 					onClick={() => this.props.onGetPosts()}
-					disabled={this.props.feedStatus === Status.PENDING}
+					disabled={this.props.postsStatus === Status.PENDING}
 				>Refresh</button>
 				{{
 					[Status.IDLE]: this.getIdleEl(),
-					[Status.ERROR]: this.getErrEl(this.props.feedErr),
+					[Status.ERROR]: this.getErrEl(this.props.postsErr),
 					[Status.PENDING]: this.getLoadingEl(),
-					[Status.SUCCESS]: this.getFeedEl(this.props.feedData)
-				}[this.props.feedStatus]}
+					[Status.SUCCESS]: this.getFeedEl(this.props.posts)
+				}[this.props.postsStatus]}
 			</div>
 		);
 	}

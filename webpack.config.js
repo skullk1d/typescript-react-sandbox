@@ -139,7 +139,7 @@ const config = {
   },
 
   // Webpack source maps:
-  devtool: 'cheap-eval-source-map',
+  devtool: 'inline-source-map',
 
   // Webpack plugins:
   plugins: [

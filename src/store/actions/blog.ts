@@ -14,7 +14,7 @@ export const getPosts = () => {
 	};
 };
 
-export const getPost = (id: string) => {
+export const getPost = (id: Number) => {
 	const api = `posts/${id}`;
 
 	return {
@@ -27,7 +27,7 @@ export const getPost = (id: string) => {
 	};
 };
 
-export const getPostComments = (id: string) => {
+export const getComments = (id: Number) => {
 	const api = `posts/${id}/comments`;
 
 	return {
@@ -40,28 +40,28 @@ export const getPostComments = (id: string) => {
 	};
 };
 
-export const addCommentToPost = (id: string, comment: string) => {
+export const addComment = (id: Number, content: string) => {
 	const api = `posts/${id}/comments`;
 
 	return {
 		type: 'ADD_COMMENT',
 		payload: {
 			promise: new Promise<Post>((resolve, reject) => {
-				handleApiResponse(api, resolve, reject, 'POST', comment);
+				handleApiResponse(api, resolve, reject, 'POST', content);
 			})
 		}
 	};
 };
 
 
-export const updateComment = (id: string, comment: string) => {
+export const updateComment = (id: Number, content: string) => {
 	const api = `comments/${id}`;
 
 	return {
 		type: 'UPDATE_COMMENT',
 		payload: {
 			promise: new Promise<Post>((resolve, reject) => {
-				handleApiResponse(api, resolve, reject, 'PUT', comment);
+				handleApiResponse(api, resolve, reject, 'PUT', content);
 			})
 		}
 	};

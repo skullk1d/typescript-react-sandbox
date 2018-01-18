@@ -5,9 +5,19 @@ export interface Action {
 	payload: Promise<any>
 }
 export interface BlogState {
-	status: Status,
-	error: string,
-	data: Post[]
+	postsStatus: Status,
+	postsErr: string,
+	posts: Post[],
+	postStatus: Status,
+	postErr: string,
+	post: Post,
+	commentsStatus: Status,
+	commentsErr: string,
+	comments: Comment[],
+	addCommentStatus: Status,
+	addCommentErr: string,
+	updateCommentStatus: Status,
+	updateCommentErr: string
 }
 export interface State {
 	blog: BlogState

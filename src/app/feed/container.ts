@@ -6,26 +6,25 @@ import { push } from 'react-router-redux';
 import BlogFeed from './BlogFeed';
 import { getPosts } from '../../store/actions/blog';
 
-interface StateProps {
-	feedStatus: Status,
-	feedErr: string,
-	feedData: Post[]
+export interface StateProps {
+	postsStatus: Status,
+	postsErr: string,
+	posts: Post[]
 }
 
-interface DispatchProps {
+export interface DispatchProps {
 	onGetPosts: () => void,
 	onGoToPost: (id: Number) => void
 }
 
-interface OwnProps {
-
+export interface OwnProps {
 }
 
 const mapStateToProps = (state: State): StateProps => {
 	return {
-		feedStatus: state.blog.status,
-		feedErr: state.blog.error,
-		feedData: state.blog.data
+		postsStatus: state.blog.postsStatus,
+		postsErr: state.blog.postsErr,
+		posts: state.blog.posts
 	};
 };
 
@@ -36,7 +35,7 @@ const mapDispatchToProps = (dispatch: Dispatch<State>): DispatchProps => {
 		},
 		onGoToPost: (id: Number) => {
 			dispatch(push({
-				pathname: `/feed/${id}`
+				pathname: `/post/${id}`
 			}));
 		},
 	};
