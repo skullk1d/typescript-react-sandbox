@@ -2,7 +2,7 @@
 
 export const baseApi = 'http://localhost:9001/';
 
-export const handleApiResponse = (api: string, resolve: any, reject: any, method: string = 'GET', body: string = '') => {
+export const handleApiResponse = (api: string, resolve: any, reject: any, method: string = 'GET', body?: string) => {
 	fetch(baseApi + api, {
 		method,
 		headers: {
@@ -10,6 +10,7 @@ export const handleApiResponse = (api: string, resolve: any, reject: any, method
 		},
 		body
 	}).then((response) => {
+		console.log(api, response)
 		// Resolve promise as string which contains API result to be manipulated in the callback
 		response.json().then((jsonData) => {
 			if (!response.ok) {

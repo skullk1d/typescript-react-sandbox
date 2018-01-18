@@ -10,7 +10,8 @@ export interface BlogFeedProps {
 	feedStatus: Status,
 	feedErr: string,
 	feedData: Post[],
-	onGetPosts: () => void
+	onGetPosts: () => void,
+	onGoToPost: (id: Number) => void
 };
 
 class BlogFeed extends React.Component<BlogFeedProps, {}> {
@@ -45,17 +46,34 @@ class BlogFeed extends React.Component<BlogFeedProps, {}> {
 	getFeedEl(feedData: Post[]) {
 		return (
 			<div>
-				{feedData}
+				<ul>
+					{feedData.map((d, i) => (
+						<li key={i} onClick={() => this.goToPost(d.id)}>
+							{d.id}
+						</li>
+					))}
+				</ul>
 			</div>
 		);
 	}
 
-	componentWillMount() {
+	goToPost(id: Number) {
+		this.props.onGoToPost(id);
+	}
+
+	componentDidMount() {
+		if (!this.props.feedData.length) {
+			this.props.onGetPosts();
+		}
 	}
 
 	render() {
 		return (
 			<div className="BlogFeed">
+				<button
+					onClick={() => this.props.onGetPosts()}
+					disabled={this.props.feedStatus === Status.PENDING}
+				>Refresh</button>
 				{{
 					[Status.IDLE]: this.getIdleEl(),
 					[Status.ERROR]: this.getErrEl(this.props.feedErr),

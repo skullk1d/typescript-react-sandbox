@@ -1,53 +1,53 @@
-import { handleApiResponse, baseApi } from '../service';
+import { handleApiResponse } from '../service';
 import { Post, Comment } from '../../types';
 
 export const getPosts = () => {
-	const url = `${baseApi}/posts`;
+	const api = `posts`;
 
 	return {
 		type: 'GET_POSTS',
 		payload: {
 			promise: new Promise<Post[]>((resolve, reject) => {
-				handleApiResponse(url, resolve, reject);
+				handleApiResponse(api, resolve, reject);
 			})
 		}
 	};
 };
 
 export const getPost = (id: string) => {
-	const url = `${baseApi}/posts/${id}`;
+	const api = `posts/${id}`;
 
 	return {
 		type: 'GET_POST',
 		payload: {
 			promise: new Promise<Post>((resolve, reject) => {
-				handleApiResponse(url, resolve, reject);
+				handleApiResponse(api, resolve, reject);
 			})
 		}
 	};
 };
 
 export const getPostComments = (id: string) => {
-	const url = `${baseApi}/posts/${id}/comments`;
+	const api = `posts/${id}/comments`;
 
 	return {
 		type: 'GET_POST_COMMENTS',
 		payload: {
 			promise: new Promise<Comment[]>((resolve, reject) => {
-				handleApiResponse(url, resolve, reject);
+				handleApiResponse(api, resolve, reject);
 			})
 		}
 	};
 };
 
 export const addCommentToPost = (id: string, comment: string) => {
-	const url = `${baseApi}/posts/${id}/comments`;
+	const api = `posts/${id}/comments`;
 
 	return {
 		type: 'ADD_COMMENT',
 		payload: {
 			promise: new Promise<Post>((resolve, reject) => {
-				handleApiResponse(url, resolve, reject, 'POST', comment);
+				handleApiResponse(api, resolve, reject, 'POST', comment);
 			})
 		}
 	};
@@ -55,13 +55,13 @@ export const addCommentToPost = (id: string, comment: string) => {
 
 
 export const updateComment = (id: string, comment: string) => {
-	const url = `${baseApi}/comments/${id}`;
+	const api = `comments/${id}`;
 
 	return {
 		type: 'UPDATE_COMMENT',
 		payload: {
 			promise: new Promise<Post>((resolve, reject) => {
-				handleApiResponse(url, resolve, reject, 'PUT', comment);
+				handleApiResponse(api, resolve, reject, 'PUT', comment);
 			})
 		}
 	};

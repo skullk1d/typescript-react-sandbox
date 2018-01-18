@@ -2,6 +2,7 @@ import { State, Post } from '../../types';
 import { Status } from '../../enums';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { push } from 'react-router-redux';
 import BlogFeed from './BlogFeed';
 import { getPosts } from '../../store/actions/blog';
 
@@ -12,7 +13,8 @@ interface StateProps {
 }
 
 interface DispatchProps {
-	onGetPosts: () => void
+	onGetPosts: () => void,
+	onGoToPost: (id: Number) => void
 }
 
 interface OwnProps {
@@ -31,7 +33,12 @@ const mapDispatchToProps = (dispatch: Dispatch<State>): DispatchProps => {
 	return {
 		onGetPosts: () => {
 			dispatch(getPosts());
-		}
+		},
+		onGoToPost: (id: Number) => {
+			dispatch(push({
+				pathname: `/feed/${id}`
+			}));
+		},
 	};
 };
 
