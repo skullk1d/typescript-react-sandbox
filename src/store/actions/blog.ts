@@ -40,9 +40,9 @@ export const getComments = (id: number) => {
 	};
 };
 
-export const addComment = (id: number, content: string) => {
+export const addComment = (id: number, comment: Comment) => {
 	const api = `posts/${id}/comments`;
-	const body = JSON.stringify({ content });
+	const body = JSON.stringify(comment);
 
 	return {
 		type: 'ADD_COMMENT',
@@ -55,9 +55,9 @@ export const addComment = (id: number, content: string) => {
 };
 
 
-export const updateComment = (id: number, content: string) => {
+export const updateComment = (id: number, comment: Comment) => {
 	const api = `comments/${id}`;
-	const body = JSON.stringify({ content });
+	const body = JSON.stringify(comment);
 
 	return {
 		type: 'UPDATE_COMMENT',

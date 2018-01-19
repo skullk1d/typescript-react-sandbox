@@ -44,7 +44,7 @@ render((
         <IndexRoute component={Home}/>
         <Route path='about' component={About}/>
         <Route path='home' component={Home}/>
-        <Route path='feed' component={BlogContainer} />
+        <Route path='blog' component={BlogContainer} />
         <Route path='post/:id' component={BlogPostContainer} />
         <Redirect from='*' to='/home'/>
       </Route>

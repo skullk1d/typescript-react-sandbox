@@ -17,8 +17,8 @@ export interface StateProps {
 
 export interface DispatchProps {
 	onGetComments: (id: number) => void,
-	onAddComment: (id: number, content: string) => void,
-	onUpdateComment: (id: number, content: string) => void,
+	onAddComment: (id: number, comment: Comment) => void,
+	onUpdateComment: (id: number, comment: Comment) => void,
 }
 
 export interface OwnProps {
@@ -42,11 +42,11 @@ const mapDispatchToProps = (dispatch: Dispatch<State>): DispatchProps => {
 		onGetComments: (id) => {
 			dispatch(getComments(id));
 		},
-		onAddComment: (id, content) => {
-			dispatch(addComment(id, content));
+		onAddComment: (id, comment) => {
+			dispatch(addComment(id, comment));
 		},
-		onUpdateComment: (id, content) => {
-			dispatch(updateComment(id, content));
+		onUpdateComment: (id, comment) => {
+			dispatch(updateComment(id, comment));
 		},
 	};
 };

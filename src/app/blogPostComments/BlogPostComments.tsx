@@ -10,18 +10,22 @@ import { StateProps, DispatchProps, OwnProps } from './container';
 export interface BlogPostCommentsProps extends StateProps, DispatchProps, OwnProps {};
 export interface BlogPostCommentsState {
 	addInput: string;
-	updateInput: string;
+	nameInput: string;
 };
+export const DEFAULT_NAME = 'Anonymous';
+
 class BlogPostComments extends React.Component<BlogPostCommentsProps, BlogPostCommentsState> {
 	constructor(props: BlogPostCommentsProps) {
 		super(props);
 
 		this.state = {
 			addInput: '',
-			updateInput: ''
+			nameInput: ''
 		};
 
 		this.handleAddInput = this.handleAddInput.bind(this);
+		this.handleNameInput = this.handleNameInput.bind(this);
+		this.handleClickAddComment = this.handleClickAddComment.bind(this);
 	}
 
 	getIdleEl() {
@@ -49,19 +53,36 @@ class BlogPostComments extends React.Component<BlogPostCommentsProps, BlogPostCo
 	}
 
 	getCommentsEl(comments: Comment[]) {
+		// newest on top
+		comments.sort((c1, c2) => (c2.id as number) - (c1.id as number));
+
 		return (
 			<div>
+				<input
+					type='text'
+					value={this.state.addInput}
+					placeholder='Your comment'
+					onChange={this.handleAddInput}
+				/>
+				<input
+					type='text'
+					value={this.state.nameInput}
+					placeholder='Your name'
+					onChange={this.handleNameInput}
+				/>
+				<button
+					onClick={this.handleClickAddComment}
+					disabled={this.props.addCommentStatus === Status.PENDING || !this.state.addInput}
+				>Add comment</button>
 				<ul>
 					{comments.map((c, i) => (
-						<li key={i} dangerouslySetInnerHTML={{ __html: c.content }}>
+						<li key={i}>
+							<div>{c.user}</div>
+							<div>{c.date}</div>
+							<div key={i} dangerouslySetInnerHTML={{ __html: c.content }}></div>
 						</li>
 					))}
 				</ul>
-				<input type='textarea' value={this.state.addInput} onChange={this.handleAddInput}/>
-				<button
-					onClick={() => this.props.onAddComment(this.props.postId, this.state.addInput)}
-					disabled={this.props.addCommentStatus === Status.PENDING || !this.state.addInput}
-				>Add comment</button>
 			</div>
 		);
 	}
@@ -74,13 +95,31 @@ class BlogPostComments extends React.Component<BlogPostCommentsProps, BlogPostCo
 		this.setState({ addInput: e.target.value});
 	}
 
+	handleNameInput(e: ChangeEvent<HTMLInputElement>) {
+		this.setState({ nameInput: e.target.value });
+	}
+
+	handleClickAddComment() {
+		const t = new Date();
+		const comment = {
+			content: this.state.addInput,
+			user: this.state.nameInput || DEFAULT_NAME,
+			date: `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()}`
+		}
+
+		this.props.onAddComment(this.props.postId, comment);
+	}
+
 	componentDidMount() {
 		this.getComments();
 	}
 
 	componentWillReceiveProps(nextProps: BlogPostCommentsProps) {
 		if (nextProps.addCommentStatus === Status.SUCCESS) {
-			this.setState({ addInput: '' });
+			this.setState({
+				addInput: '',
+				nameInput: ''
+			});
 		}
 	}
 

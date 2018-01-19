@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const menuItems = [
   { id: 'home', name: 'Home'},
   { id: 'about', name: 'About'},
-  { id: 'feed', name: 'Feed'},
+  { id: 'blog', name: 'Blog'},
 ];
 
 const Navigation = () => (
