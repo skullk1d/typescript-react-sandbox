@@ -42,12 +42,13 @@ export const getComments = (id: number) => {
 
 export const addComment = (id: number, content: string) => {
 	const api = `posts/${id}/comments`;
+	const body = JSON.stringify({ content });
 
 	return {
 		type: 'ADD_COMMENT',
 		payload: {
 			promise: new Promise<Post>((resolve, reject) => {
-				handleApiResponse(api, resolve, reject, 'POST', content);
+				handleApiResponse(api, resolve, reject, 'POST', body);
 			})
 		}
 	};
@@ -56,12 +57,13 @@ export const addComment = (id: number, content: string) => {
 
 export const updateComment = (id: number, content: string) => {
 	const api = `comments/${id}`;
+	const body = JSON.stringify({ content });
 
 	return {
 		type: 'UPDATE_COMMENT',
 		payload: {
 			promise: new Promise<Post>((resolve, reject) => {
-				handleApiResponse(api, resolve, reject, 'PUT', content);
+				handleApiResponse(api, resolve, reject, 'PUT', body);
 			})
 		}
 	};

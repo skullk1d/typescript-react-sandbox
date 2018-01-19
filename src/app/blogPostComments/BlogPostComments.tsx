@@ -2,16 +2,26 @@
  * @overview Feed page.  Renders blog feed
  */
 
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Status } from '../../enums';
 import { Comment } from '../../types';
 import { StateProps, DispatchProps, OwnProps } from './container';
 
 export interface BlogPostCommentsProps extends StateProps, DispatchProps, OwnProps {};
-
-class BlogPostComments extends React.Component<BlogPostCommentsProps, {}> {
+export interface BlogPostCommentsState {
+	addInput: string;
+	updateInput: string;
+};
+class BlogPostComments extends React.Component<BlogPostCommentsProps, BlogPostCommentsState> {
 	constructor(props: BlogPostCommentsProps) {
 		super(props);
+
+		this.state = {
+			addInput: '',
+			updateInput: ''
+		};
+
+		this.handleAddInput = this.handleAddInput.bind(this);
 	}
 
 	getIdleEl() {
@@ -47,22 +57,42 @@ class BlogPostComments extends React.Component<BlogPostCommentsProps, {}> {
 						</li>
 					))}
 				</ul>
+				<input type='textarea' value={this.state.addInput} onChange={this.handleAddInput}/>
+				<button
+					onClick={() => this.props.onAddComment(this.props.postId, this.state.addInput)}
+					disabled={this.props.addCommentStatus === Status.PENDING || !this.state.addInput}
+				>Add comment</button>
 			</div>
 		);
 	}
 
+	getComments() {
+		this.props.onGetComments(this.props.postId);
+	}
+
+	handleAddInput(e: ChangeEvent<HTMLInputElement>) {
+		this.setState({ addInput: e.target.value});
+	}
+
 	componentDidMount() {
-		const postId = this.props.postId;
+		this.getComments();
+	}
 
-		if (!Number.isNaN(postId)) {
-			this.props.onGetComments(postId);
+	componentWillReceiveProps(nextProps: BlogPostCommentsProps) {
+		if (nextProps.addCommentStatus === Status.SUCCESS) {
+			this.setState({ addInput: '' });
 		}
+	}
 
+	componentDidUpdate(lastProps: BlogPostCommentsProps) {
+		if (this.props.addCommentStatus === Status.SUCCESS && this.props.addCommentStatus !== lastProps.addCommentStatus) {
+			this.getComments();
+		}
 	}
 
 	render() {
 		return (
-			<div className="BlogPost">
+			<div className="BlogPostComments">
 				{{
 					[Status.IDLE]: this.getIdleEl(),
 					[Status.ERROR]: this.getErrEl(this.props.commentsErr),
