@@ -59,36 +59,14 @@ const config = {
         ]
       },
 
-      // app.scss will be injected into index.html as a `<style>` tag.
+      // all SASS files will be injected into index.html as a `<style>` tag.
       {
-        test: /app\.scss$/,
+        test: /\.scss$/,
         use: [
           {
             loader: 'style-loader'
           }, {
             loader: 'css-loader'
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function() {
-                return [require('autoprefixer')]
-              }
-            }
-          }, {
-            loader: 'sass-loader'
-          },
-        ]
-      },
-
-      // All files ending in .scss that is not app.scss will be loaded as a string.
-      // This can be useful when importing styles into your application to pass
-      // to component definitions.
-      {
-        test: /\.scss$/,
-        exclude: /app\.scss$/,
-        use: [
-          {
-            loader: 'raw-loader'
           }, {
             loader: 'postcss-loader',
             options: {

@@ -5,8 +5,8 @@
 import React from 'react';
 import { Status } from '../../enums';
 import { Post } from '../../types';
-
 import { StateProps, DispatchProps, OwnProps } from './container';
+import './styles.scss';
 
 export interface BlogProps extends StateProps, DispatchProps, OwnProps {};
 

@@ -7,6 +7,7 @@ import { Status } from '../../enums';
 import { Post } from '../../types';
 import { StateProps, DispatchProps, OwnProps } from './container';
 import BlogPostComments from '../blogPostComments';
+import './styles.scss';
 
 export interface BlogPostProps extends StateProps, DispatchProps, OwnProps {};
 
