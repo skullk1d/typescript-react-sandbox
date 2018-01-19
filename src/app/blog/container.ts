@@ -3,7 +3,7 @@ import { Status } from '../../enums';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { push } from 'react-router-redux';
-import BlogFeed from './BlogFeed';
+import Blog from './Blog';
 import { getPosts } from '../../store/actions/blog';
 
 export interface StateProps {
@@ -14,7 +14,7 @@ export interface StateProps {
 
 export interface DispatchProps {
 	onGetPosts: () => void,
-	onGoToPost: (id: Number) => void
+	onGoToPost: (id: number) => void
 }
 
 export interface OwnProps {
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch: Dispatch<State>): DispatchProps => {
 		onGetPosts: () => {
 			dispatch(getPosts());
 		},
-		onGoToPost: (id: Number) => {
+		onGoToPost: (id: number) => {
 			dispatch(push({
 				pathname: `/post/${id}`
 			}));
@@ -41,9 +41,9 @@ const mapDispatchToProps = (dispatch: Dispatch<State>): DispatchProps => {
 	};
 };
 
-const BlogFeedContainer = connect<StateProps, DispatchProps, OwnProps, State>(
+const BlogContainer = connect<StateProps, DispatchProps, OwnProps, State>(
 	mapStateToProps,
 	mapDispatchToProps
-)(BlogFeed);
+)(Blog);
 
-export default BlogFeedContainer;
+export default BlogContainer;

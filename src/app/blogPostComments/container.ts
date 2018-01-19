@@ -1,14 +1,11 @@
-import { State, Post, Comment } from '../../types';
+import { State, Comment } from '../../types';
 import { Status } from '../../enums';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import BlogFeedPost from './BlogFeedPost';
-import { getPost, getComments, addComment, updateComment } from '../../store/actions/blog';
+import BlogPostComments from './BlogPostComments';
+import { getComments, addComment, updateComment } from '../../store/actions/blog';
 
 export interface StateProps {
-	postStatus: Status,
-	postErr: string,
-	post: Post,
 	commentsStatus: Status,
 	commentsErr: string,
 	comments: Comment[],
@@ -19,21 +16,17 @@ export interface StateProps {
 }
 
 export interface DispatchProps {
-	onGetPost: (id: Number) => void,
-	onGetComments: (id: Number) => void,
-	onAddComment: (id: Number, content: string) => void,
-	onUpdateComment: (id: Number, content: string) => void,
+	onGetComments: (id: number) => void,
+	onAddComment: (id: number, content: string) => void,
+	onUpdateComment: (id: number, content: string) => void,
 }
 
 export interface OwnProps {
-	params: { id: string } // route params prop provided by react-router, interface varies based on <route> definition
+	postId: number
 }
 
 const mapStateToProps = (state: State): StateProps => {
 	return {
-		postStatus: state.blog.postStatus,
-		postErr: state.blog.postErr,
-		post: state.blog.post,
 		commentsStatus: state.blog.commentsStatus,
 		commentsErr: state.blog.commentsErr,
 		comments: state.blog.comments,
@@ -46,9 +39,6 @@ const mapStateToProps = (state: State): StateProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch<State>): DispatchProps => {
 	return {
-		onGetPost: (id) => {
-			dispatch(getPost(id));
-		},
 		onGetComments: (id) => {
 			dispatch(getComments(id));
 		},
@@ -61,9 +51,9 @@ const mapDispatchToProps = (dispatch: Dispatch<State>): DispatchProps => {
 	};
 };
 
-const BlogFeedPostContainer = connect<StateProps, DispatchProps, OwnProps, State>(
+const BlogPostCommentsContainer = connect<StateProps, DispatchProps, OwnProps, State>(
 	mapStateToProps,
 	mapDispatchToProps
-)(BlogFeedPost);
+)(BlogPostComments);
 
-export default BlogFeedPostContainer;
+export default BlogPostCommentsContainer;

@@ -22,8 +22,8 @@ import reducers from './store/reducers';
 import App from './app/App';
 import About from './app/about';
 import Home from './app/home';
-import BlogFeedContainer from './app/feed';
-import BlogFeedPostContainer from './app/feedPost';
+import BlogContainer from './app/blog';
+import BlogPostContainer from './app/blogPost';
 
 const initialState = {}; // Manages global state for app
 
@@ -44,8 +44,8 @@ render((
         <IndexRoute component={Home}/>
         <Route path='about' component={About}/>
         <Route path='home' component={Home}/>
-        <Route path='feed' component={BlogFeedContainer} />
-        <Route path='post/:id' component={BlogFeedPostContainer} />
+        <Route path='feed' component={BlogContainer} />
+        <Route path='post/:id' component={BlogPostContainer} />
         <Redirect from='*' to='/home'/>
       </Route>
     </Router>

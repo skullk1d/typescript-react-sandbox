@@ -8,10 +8,10 @@ import { Post } from '../../types';
 
 import { StateProps, DispatchProps, OwnProps } from './container';
 
-export interface BlogFeedProps extends StateProps, DispatchProps, OwnProps {};
+export interface BlogProps extends StateProps, DispatchProps, OwnProps {};
 
-class BlogFeed extends React.Component<BlogFeedProps, {}> {
-	constructor(props: BlogFeedProps) {
+class Blog extends React.Component<BlogProps, {}> {
+	constructor(props: BlogProps) {
 		super(props);
 	}
 
@@ -61,7 +61,7 @@ class BlogFeed extends React.Component<BlogFeedProps, {}> {
 
 	render() {
 		return (
-			<div className="BlogFeed">
+			<div className="Blog">
 				<button
 					onClick={() => this.props.onGetPosts()}
 					disabled={this.props.postsStatus === Status.PENDING}
@@ -77,4 +77,4 @@ class BlogFeed extends React.Component<BlogFeedProps, {}> {
 	}
 }
 
-export default BlogFeed;
+export default Blog;

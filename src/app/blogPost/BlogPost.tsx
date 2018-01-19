@@ -6,11 +6,12 @@ import React from 'react';
 import { Status } from '../../enums';
 import { Post } from '../../types';
 import { StateProps, DispatchProps, OwnProps } from './container';
+import BlogPostComments from '../blogPostComments';
 
-export interface BlogFeedPostProps extends StateProps, DispatchProps, OwnProps {};
+export interface BlogPostProps extends StateProps, DispatchProps, OwnProps {};
 
-class BlogFeedPost extends React.Component<BlogFeedPostProps, {}> {
-	constructor(props: BlogFeedPostProps) {
+class BlogPost extends React.Component<BlogPostProps, {}> {
+	constructor(props: BlogPostProps) {
 		super(props);
 	}
 
@@ -41,7 +42,9 @@ class BlogFeedPost extends React.Component<BlogFeedPostProps, {}> {
 	getPostEl(post: Post) {
 		return (
 			<div>
-				{post.content}
+				<div dangerouslySetInnerHTML={{ __html: post.content }}>
+				</div>
+				<BlogPostComments postId={post.id} />
 			</div>
 		);
 	}
@@ -57,7 +60,7 @@ class BlogFeedPost extends React.Component<BlogFeedPostProps, {}> {
 
 	render() {
 		return (
-			<div className="BlogFeedPost">
+			<div className="BlogPost">
 				{{
 					[Status.IDLE]: this.getIdleEl(),
 					[Status.ERROR]: this.getErrEl(this.props.postErr),
@@ -69,4 +72,4 @@ class BlogFeedPost extends React.Component<BlogFeedPostProps, {}> {
 	}
 }
 
-export default BlogFeedPost;
+export default BlogPost;

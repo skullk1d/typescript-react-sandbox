@@ -24,20 +24,20 @@ export interface State {
 }
 
 export interface Post {
-	"id": Number;
-	"title": String;
-	"author": String;
-	"publish_date": String; // Date that post was published in YYYY-MM-DD format
-	"slug": String;         // Readable URL to use for individual posts
-	"description": String;  // Short description for blog post listing
-	"content": String;      // Full blog post content -- may contain markup
+	"id": number;
+	"title": string;
+	"author": string;
+	"publish_date": string; // Date that post was published in YYYY-MM-DD format
+	"slug": string;         // Readable URL to use for individual posts
+	"description": string;  // Short description for blog post listing
+	"content": string;      // Full blog post content -- may contain markup
 }
 
 export interface Comment {
-	"id": Number;
-	"postId": Number;
-	"parent_id": Number | null; // Parent comment for replies, is `null` if top-level comment
-	"user": String;           // Name of commenter
-	"date": String;           // Date of comment in YYYY-MM-DD format
-	"content": String;        // Comment content
+	"id": number;
+	"postId": number;
+	"parent_id": number | null; // Parent comment for replies, is `null` if top-level comment
+	"user": string;           // Name of commenter
+	"date": string;           // Date of comment in YYYY-MM-DD format
+	"content": string;        // Comment content
 }

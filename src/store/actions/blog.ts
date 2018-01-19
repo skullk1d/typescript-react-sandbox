@@ -14,7 +14,7 @@ export const getPosts = () => {
 	};
 };
 
-export const getPost = (id: Number) => {
+export const getPost = (id: number) => {
 	const api = `posts/${id}`;
 
 	return {
@@ -27,7 +27,7 @@ export const getPost = (id: Number) => {
 	};
 };
 
-export const getComments = (id: Number) => {
+export const getComments = (id: number) => {
 	const api = `posts/${id}/comments`;
 
 	return {
@@ -40,7 +40,7 @@ export const getComments = (id: Number) => {
 	};
 };
 
-export const addComment = (id: Number, content: string) => {
+export const addComment = (id: number, content: string) => {
 	const api = `posts/${id}/comments`;
 
 	return {
@@ -54,7 +54,7 @@ export const addComment = (id: Number, content: string) => {
 };
 
 
-export const updateComment = (id: Number, content: string) => {
+export const updateComment = (id: number, content: string) => {
 	const api = `comments/${id}`;
 
 	return {
