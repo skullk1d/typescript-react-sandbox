@@ -7,14 +7,14 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import BlogPost from './BlogPost';
+import BlogPost from './BlogPostComments';
 
-xdescribe('BlogPost', function() {
+xdescribe('BlogPostComments', function() {
   let component;
 
   beforeEach(function() {
     const renderer = ReactTestUtils.createRenderer();
-    renderer.render(<BlogPost/>);
+    renderer.render(<BlogPostComments/>);
     component = renderer.getRenderOutput();
   });
 
