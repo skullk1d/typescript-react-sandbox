@@ -24,17 +24,17 @@ describe('blog data', () => {
 			expect(posts.length).toBeGreaterThan(0);
 		});
 
-		describe('should not allow empty posts', () => {
-			function spec(p) {
-				it(`post ${p.id} should not be empty`, () => {
-					expect(p.content).toBeTruthy();
-				});
+		it('should not allow empty posts', () => {
+			let foundEmpty = false;
+
+			for (let i = 0; i < posts.length; i += 1) {
+				if (!posts[i].content) {
+					foundEmpty = true;
+					break;
+				}
 			}
 
-			console.log(posts.length)
-			for (let i = 0; i < posts.length; i += 1) {
-				spec(posts[i]);
-			}
+			expect(foundEmpty).toBe(false);
 		});
 	})
 })
