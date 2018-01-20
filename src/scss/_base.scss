@@ -1,3 +1,5 @@
+@import "./constants.scss";
+
 html,
 body,
 body > .container {
@@ -10,4 +12,32 @@ body {
     flex-direction: column;
     justify-content: space-between;
   }
+}
+
+* {
+	box-sizing: border-box;
+	position: relative;
+	margin: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+ul, ol {
+	list-style-type: none;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: $linkColor;
+
+	&:hover {
+		color: lighten($linkColor, 25%);
+	}
+}
+
+input {
+	-webkit-appearance: none;
+	background-color: transparent;
+	padding: 0;
+	border: none;
 }

@@ -1,0 +1,36 @@
+@import "../../scss/constants";
+
+.BlogPostComments {
+	.addCommentForm {
+		.commentInput {
+			resize: none;
+			width: 100%;
+    		margin-bottom: 24px;
+		}
+
+		.addCommentButton {
+			border-color: $primaryColor;
+		}
+	}
+
+	.commentList {
+		.commentListItem {
+			margin: 42px auto;
+
+			.user {
+				display: inline-block;
+				vertical-align: middle;
+				color: $lightFontColor;
+			}
+
+			.date {
+				font-size: $smallFontSize;
+				font-style: italic;
+				color: $darkFontColor;
+				display: inline-block;
+				vertical-align: middle;
+				margin-left: 24px;
+			}
+		}
+	}
+}

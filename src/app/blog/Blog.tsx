@@ -45,14 +45,22 @@ class Blog extends React.Component<BlogProps, {}> {
 
 		return (
 			<div>
-				<ul>
+				<ul className="postList">
 					{posts.map((p, i) => (
-						<li key={i}>
-							<div>{p.author}</div>
-							<div>{p.title}</div>
-							<div>{p.publish_date}</div>
-							<article>{p.description}</article>
-							<a onClick={() => this.handleClickReadMore(p.id as number)}>Read more →</a>
+						<li key={i} className="postListItem">
+							<div className="author">{p.author}</div>
+							<div className="title">{p.title}</div>
+							<article className="description">
+								<span className="date">{p.publish_date}</span>
+								{p.description}
+							</article>
+							<a href="#" className="readMore" onClick={(e) => {
+									e.preventDefault();
+									this.handleClickReadMore(p.id as number);
+								}
+							}>
+								Read more →
+							</a>
 						</li>
 					))}
 				</ul>
@@ -74,9 +82,12 @@ class Blog extends React.Component<BlogProps, {}> {
 		return (
 			<div className="Blog">
 				<button
+					className="refreshButton btn btn-default"
 					onClick={() => this.props.onGetPosts()}
 					disabled={this.props.postsStatus === Status.PENDING}
-				>Refresh</button>
+				>
+					Refresh
+				</button>
 				{{
 					[Status.IDLE]: this.getIdleEl(),
 					[Status.ERROR]: this.getErrEl(this.props.postsErr),

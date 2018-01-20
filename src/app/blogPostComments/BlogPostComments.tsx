@@ -6,6 +6,7 @@ import React, { ChangeEvent } from 'react';
 import { Status } from '../../enums';
 import { Comment } from '../../types';
 import { StateProps, DispatchProps, OwnProps } from './container';
+import './styles.scss';
 
 export interface BlogPostCommentsProps extends StateProps, DispatchProps, OwnProps {};
 export interface BlogPostCommentsState {
@@ -58,28 +59,34 @@ class BlogPostComments extends React.Component<BlogPostCommentsProps, BlogPostCo
 
 		return (
 			<div>
-				<input
-					type='text'
-					value={this.state.addInput}
-					placeholder='Your comment'
-					onChange={this.handleAddInput}
-				/>
-				<input
-					type='text'
-					value={this.state.nameInput}
-					placeholder='Your name'
-					onChange={this.handleNameInput}
-				/>
-				<button
-					onClick={this.handleClickAddComment}
-					disabled={this.props.addCommentStatus === Status.PENDING || !this.state.addInput}
-				>Add comment</button>
-				<ul>
+				<div className="addCommentForm input-group">
+					<textarea
+						className="commentInput form-control"
+						value={this.state.addInput}
+						placeholder='Your comment'
+						onChange={this.handleAddInput}
+					/>
+					<input
+						className="nameInput form-control"
+						type="text"
+						value={this.state.nameInput}
+						placeholder='Your name'
+						onChange={this.handleNameInput}
+					/>
+					<button
+						className="addCommentButton btn btn-default"
+						onClick={this.handleClickAddComment}
+						disabled={this.props.addCommentStatus === Status.PENDING || !this.state.addInput}
+					>
+						Add comment
+					</button>
+				</div>
+				<ul className="commentList">
 					{comments.map((c, i) => (
-						<li key={i}>
-							<div>{c.user}</div>
-							<div>{c.date}</div>
-							<div key={i} dangerouslySetInnerHTML={{ __html: c.content }}></div>
+						<li key={i} className="commentListItem">
+							<div className="user">{c.user}</div>
+							<div className="date">{c.date}</div>
+							<div className = "content" key={i} dangerouslySetInnerHTML={{ __html: c.content }}></div>
 						</li>
 					))}
 				</ul>
@@ -91,7 +98,7 @@ class BlogPostComments extends React.Component<BlogPostCommentsProps, BlogPostCo
 		this.props.onGetComments(this.props.postId);
 	}
 
-	handleAddInput(e: ChangeEvent<HTMLInputElement>) {
+	handleAddInput(e: ChangeEvent<HTMLTextAreaElement>) {
 		this.setState({ addInput: e.target.value});
 	}
 

@@ -1,5 +1,31 @@
+@import "../../scss/constants";
+
 .BlogPost {
-	li {
-		color: blue;
+	.postWrapper {
+		margin: 42px auto;
+
+		.author {
+			color: $lightFontColor;
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.title {
+			margin: 9px auto;
+			font-size: $largeFontSize;
+		}
+
+		.date {
+			font-size: $smallFontSize;
+			font-style: italic;
+			color: $darkFontColor;
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: 24px;
+		}
+	}
+
+	.BlogPostComments {
+		margin-left: 42px;
 	}
 }

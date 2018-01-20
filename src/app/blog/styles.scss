@@ -1,5 +1,40 @@
+@import "../../scss/constants";
+
 .Blog {
-	li {
-		color: red;
+	.refreshButton {
+		border-color: $primaryColor;
+	}
+
+	.postList {
+		.postListItem {
+			margin: 42px auto;
+
+			.author {
+				color: $lightFontColor;
+			}
+
+			.title {
+				margin: 9px auto;
+				font-size: $largeFontSize;
+			}
+
+			.date {
+				font-size: $smallFontSize;
+				font-style: italic;
+				color: $darkFontColor;
+				display: inline-block;
+				vertical-align: middle;
+				margin-right: 8px;
+			}
+
+			.description {
+				color: $lightFontColor;
+				margin-bottom: 4px;
+			}
+
+			.readMore {
+				text-decoration: underline;
+			}
+		}
 	}
 }

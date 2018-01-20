@@ -42,11 +42,11 @@ class BlogPost extends React.Component<BlogPostProps, {}> {
 
 	getPostEl(post: Post) {
 		return (
-			<div>
-				<div>{post.author}</div>
-				<div>{post.title}</div>
-				<div>{post.publish_date}</div>
-				<article dangerouslySetInnerHTML={{ __html: post.content }}></article>
+			<div className="postWrapper">
+				<div className="author">{post.author}</div>
+				<div className="date">{post.publish_date}</div>
+				<div className="title">{post.title}</div>
+				<article className="content" dangerouslySetInnerHTML={{ __html: post.content }}></article>
 				<BlogPostComments postId={post.id as number} />
 			</div>
 		);
