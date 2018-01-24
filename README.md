@@ -1,5 +1,5 @@
 # Telnyx starter kit
-> Boilerplate web application for Telnyx take-home code challenge
+> Boilerplate web application
 
 ## Getting started
 
@@ -18,8 +18,6 @@ This starter kit provides the basics needed to quickly bootstrap your web applic
 * TypeScript transpiler ([TypeScript](https://www.typescriptlang.org/) + [TypeScript loader](https://github.com/TypeStrong/ts-loader))
 * CSS preprocessor and UI utilities ([SASS](http://sass-lang.com/) and [Bootstrap 4](https://getbootstrap.com/))
 * Test framework ([Karma](https://karma-runner.github.io/1.0/index.html) + [Jasmine](https://jasmine.github.io/2.8/introduction))
-
-As long as requirements for the challenge are met, feel free to add additional npm packages and modify files in the starter kit as you see fit.
 
 A barebones web application with routing, seed data, and stubbed out REST API is also included to get you started.  See [Using the REST API](#using-the-rest-api) once you're up and running for more information.
 
@@ -61,33 +59,3 @@ A REST API is provided with seed data for blog posts and comments.  The REST API
 **GET** `/posts/{id}/comments` *List all comments for single blog post*<br>
 **POST** `/posts/{id}/comments` *Add comment to single blog post*<br>
 **PUT** `/comments/{id}` *Update single comment*<br>
-
-```javascript
-interface Post {
-  "id": Number;
-  "title": String;
-  "author": String;
-  "publish_date": String; // Date that post was published in YYYY-MM-DD format
-  "slug": String;         // Readable URL to use for individual posts
-  "description": String;  // Short description for blog post listing
-  "content": String;      // Full blog post content -- may contain markup
-}
-
-```
-
-```javascript
-interface Comment {
-  "id": Number;
-  "postId": Number;
-  "parent_id": Number|null; // Parent comment for replies, is `null` if top-level comment
-  "user": String;           // Name of commenter
-  "date": String;           // Date of comment in YYYY-MM-DD format
-  "content": String;        // Comment content
-}
-```
-
-## Delivering to Telnyx
-
-You may create a Git repo, or zip up this entire directly and deliver the source code to Telnyx.  Ensure that extraneous folders, eg. `/node_modules`, are not included in the zip file.  If you've initialized Git in this directory locally, you may use [git clean](https://git-scm.com/docs/git-clean) to remove uncommitted and ignored files before compressing the project.  Including version control is strongly encouraged.
-
-**Thank you, and have fun!**
